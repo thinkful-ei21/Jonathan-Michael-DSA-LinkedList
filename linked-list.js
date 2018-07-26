@@ -71,17 +71,17 @@ class LinkedList {
 
     let currNode = this.head;
     let prevNode = this.head;
-    // let listLength = 0;
-    // while (currNode) {
-    //   listLength++;
-    //   prevNode = currNode;
-    //   currNode = currNode.next;
-    // }
 
     while (position) {
+      if (position === this.getLength() + 1) {
+        console.log(this.getLength() + 1);
+        this.insertLast(item);
+        return;
+      }
+
       position--;
 
-      if (currNode.next - 1 === null) {
+      if (currNode.next === null) {
         console.log('Position Exceedes List Length');
         return;
       }
@@ -134,30 +134,40 @@ class LinkedList {
       return;
     }
 
-    // let { currNode, prevNode }= this.crawler(item);
-    // // let currNode = this.crawler(item.currNode);
-    // console.log(currNode);
-
     prevNode.next = currNode.next;
   }
 
-  // crawler(SLL, item) {
-
-  //   let currNode = this.head;
-  //   let prevNode = this.head;
-
-  //   while (currNode !== null && currNode.value !== item) {
-  //     prevNode = currNode;
-  //     currNode = currNode.next;
-  //   }
-
-  //   if (currNode === null) {
-  //     console.log('Item Not Found');
-  //     return;
-  //   }
-
-  //   return currNode, prevNode;
-  // }
+  getLength() {
+    let currNode = this.head;
+    let listLength = 0;
+    while (currNode) {
+      listLength++;
+      currNode = currNode.next;
+    }
+    return listLength;
+  }
 }
+
+// let { currNode, prevNode }= this.crawler(item);
+// // let currNode = this.crawler(item.currNode);
+// console.log(currNode);
+// crawler(SLL, item) {
+
+//   let currNode = this.head;
+//   let prevNode = this.head;
+
+//   while (currNode !== null && currNode.value !== item) {
+//     prevNode = currNode;
+//     currNode = currNode.next;
+//   }
+
+//   if (currNode === null) {
+//     console.log('Item Not Found');
+//     return;
+//   }
+
+//   return currNode, prevNode;
+// }
+// }
 
 module.exports = LinkedList;
