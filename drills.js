@@ -30,7 +30,15 @@ function main() {
 
   // console.log(findPrev(SLL, 'Starbuck'));
 
-  console.log(findLast(SLL));
+  // console.log(findLast(SLL));
+
+  // WhatDoesThisProgramDo()  shifts all of the nodes to the next available nodes keeping the order  The complexity is O(n)
+
+  // !!  Only got this far !!
+  // Reverslist still in progress
+ // console.log(display(listRevervsal(SLL)));
+
+
 }
 
 function display(SLL) {
@@ -57,10 +65,10 @@ const getLength = SLL => {
 
 const isEmpty = SLL => {
   if (SLL.head === null) {
-    return 'List Is Empty';
+    return true;
   }
   if (SLL.head !== null) {
-    return 'List Is Not Empty';
+    return false;
   }
 };
 
@@ -86,6 +94,37 @@ const findLast = SLL => {
     }
     currNode = currNode.next;
   }
+};
+
+const listRevervsal = SLL => {
+  let lastNode = findLast(SLL);
+  let nextToLastNode = findPrev(SLL, findLast(SLL));
+  let firstNode = SLL.head;
+  let currNode = SLL.head;
+  let prevNode = SLL.head;
+
+  while(firstNode) {
+    if (currNode.next === null) {
+      if(isEmpty) {
+        return SLL;
+      }
+      currNode.next = prevNode;
+      SLL.remove(lastNode);
+      return listRevervsal(SLL);
+    }
+
+    prevNode = currNode;
+    currNode = currNode.next;
+  }
+
+  SLL.head = lastNode;
+  lastNode.next = nextToLastNode;
+
+
+  return SLL;
+  // console.log('Current: '+ currNode);
+  // console.log('Previous: '+ prevNode);
+
 };
 
 main();
