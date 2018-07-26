@@ -34,9 +34,7 @@ class LinkedList {
       }
       prevNode = currNode;
       currNode = currNode.next;
-
     }
-  
     prevNode.next = new _Node(item, null);
   }
 
