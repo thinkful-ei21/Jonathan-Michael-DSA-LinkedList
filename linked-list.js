@@ -1,7 +1,6 @@
 'use strict';
 
-const node = require('./node');
-const _Node = new node();
+const _Node = require('./node');
 
 class LinkedList {
   constructor() {
@@ -22,6 +21,23 @@ class LinkedList {
       }
       tempNode.next = new _Node(item, null);
     }
+  }
+
+  insertBefore(item, beforeItem) {
+    let currNode = this.head;
+    let prevNode = this.head;
+
+    while(currNode) {
+      if (currNode.value === beforeItem) {
+        prevNode.next = new _Node(item, currNode);
+        return;
+      }
+      prevNode = currNode;
+      currNode = currNode.next;
+
+    }
+  
+    prevNode.next = new _Node(item, null);
   }
 
   find(item) {
@@ -62,8 +78,30 @@ class LinkedList {
       return;
     }
 
+    // let { currNode, prevNode }= this.crawler(item);
+    // // let currNode = this.crawler(item.currNode);
+    // console.log(currNode);
+
     prevNode.next = currNode.next;
   }
+
+  // crawler(SLL, item) {
+
+  //   let currNode = this.head;
+  //   let prevNode = this.head;
+  
+  //   while (currNode !== null && currNode.value !== item) {
+  //     prevNode = currNode;
+  //     currNode = currNode.next;
+  //   }
+  
+  //   if (currNode === null) {
+  //     console.log('Item Not Found');
+  //     return;
+  //   }
+
+  //   return currNode, prevNode;
+  // }
 }
 
 module.exports = LinkedList;
