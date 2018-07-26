@@ -24,16 +24,74 @@ class LinkedList {
   }
 
   insertBefore(item, beforeItem) {
+    if (this.head === null) {
+      console.log('List Is Empty');
+      return;
+    }
+
     let currNode = this.head;
     let prevNode = this.head;
 
-    while(currNode) {
+    while (currNode) {
       if (currNode.value === beforeItem) {
         prevNode.next = new _Node(item, currNode);
         return;
       }
       prevNode = currNode;
       currNode = currNode.next;
+    }
+    prevNode.next = new _Node(item, null);
+  }
+
+  insertAfter(item, afterItem) {
+    if (this.head === null) {
+      console.log('List Is Empty');
+      return;
+    }
+
+    let currNode = this.head;
+    let nextNode = this.head;
+
+    while (currNode) {
+      if (currNode.value === afterItem) {
+        currNode.next = new _Node(item, nextNode);
+        return;
+      }
+      currNode = nextNode;
+      nextNode = nextNode.next;
+    }
+    currNode.next = new _Node(item, null);
+  }
+
+  insertAt(item, position) {
+    if (this.head === null) {
+      console.log('List Is Empty');
+      return;
+    }
+
+    let currNode = this.head;
+    let prevNode = this.head;
+    // let listLength = 0;
+    // while (currNode) {
+    //   listLength++;
+    //   prevNode = currNode;
+    //   currNode = currNode.next;
+    // }
+
+    while (position) {
+      position--;
+
+      if (currNode.next - 1 === null) {
+        console.log('Position Exceedes List Length');
+        return;
+      }
+      prevNode = currNode;
+      currNode = currNode.next;
+
+      if (position === 1) {
+        prevNode.next = new _Node(item, currNode);
+        return;
+      }
     }
     prevNode.next = new _Node(item, null);
   }
@@ -87,12 +145,12 @@ class LinkedList {
 
   //   let currNode = this.head;
   //   let prevNode = this.head;
-  
+
   //   while (currNode !== null && currNode.value !== item) {
   //     prevNode = currNode;
   //     currNode = currNode.next;
   //   }
-  
+
   //   if (currNode === null) {
   //     console.log('Item Not Found');
   //     return;
