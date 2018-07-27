@@ -34,11 +34,9 @@ function main() {
 
   // WhatDoesThisProgramDo()  shifts all of the nodes to the next available nodes keeping the order  The complexity is O(n)
 
-  // !!  Only got this far !!
-  // Reverslist still in progress
- // console.log(display(listRevervsal(SLL)));
+  // console.log(display(listRevervsal(SLL)));
 
-
+  console.log(findThirdFromLast(SLL));
 }
 
 function display(SLL) {
@@ -97,34 +95,37 @@ const findLast = SLL => {
 };
 
 const listRevervsal = SLL => {
-  let lastNode = findLast(SLL);
-  let nextToLastNode = findPrev(SLL, findLast(SLL));
-  let firstNode = SLL.head;
-  let currNode = SLL.head;
-  let prevNode = SLL.head;
-
-  while(firstNode) {
-    if (currNode.next === null) {
-      if(isEmpty) {
-        return SLL;
-      }
-      currNode.next = prevNode;
-      SLL.remove(lastNode);
-      return listRevervsal(SLL);
-    }
-
-    prevNode = currNode;
-    currNode = currNode.next;
+  if (SLL.head === null) {
+    console.log('List Is Empty');
+    return;
   }
 
-  SLL.head = lastNode;
-  lastNode.next = nextToLastNode;
+  let currNode = SLL.head;
+  let prevNode = null;
+  let nextNode = null;
 
-
+  while (currNode !== null) {
+    // flips pointers
+    nextNode = currNode.next;
+    currNode.next = prevNode;
+    // repositions along the list
+    prevNode = currNode;
+    currNode = nextNode;
+  }
+  SLL.head = prevNode;
   return SLL;
-  // console.log('Current: '+ currNode);
-  // console.log('Previous: '+ prevNode);
+};
 
+const findThirdFromLast = SLL => {
+  if (SLL.head === null) {
+    console.log('List Is Empty');
+    return;
+  }
+
+  let lastNode = findLast(SLL);
+  SLL.remove(lastNode);
+  let newLastNode = findLast(SLL);
+  return findPrev(SLL, newLastNode);
 };
 
 main();
