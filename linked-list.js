@@ -43,24 +43,20 @@ class LinkedList {
     prevNode.next = new _Node(item, null);
   }
 
-  insertAfter(item, afterItem) {
-    if (this.head === null) {
-      console.log('List Is Empty');
-      return;
-    }
-
-    let currNode = this.head;
-    let nextNode = this.head;
-
-    while (currNode) {
-      if (currNode.value === afterItem) {
-        currNode.next = new _Node(item, nextNode);
-        return;
+  insertAfter(input, afterNode) {
+    let node = new _Node(input);
+    let curr = this.head;
+    if (afterNode === curr) {
+      node.next = curr.next;
+      curr.next = node;
+    } else {
+      curr = this.head;
+      while (curr.value !== afterNode.value) {
+        curr = curr.next;
       }
-      currNode = nextNode;
-      nextNode = nextNode.next;
+      node.next = curr.next;
+      curr.next = node;
     }
-    currNode.next = new _Node(item, null);
   }
 
   insertAt(item, position) {
